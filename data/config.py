@@ -10,6 +10,7 @@ BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 admins = [
     os.getenv("ADMIN_ID"),
 ]
+admin_id = os.getenv("ADMIN_ID")
 
 db_pass = str(os.getenv("DB_PASS"))
 db_name = str(os.getenv("DB_NAME"))
