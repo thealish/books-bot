@@ -5,8 +5,8 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from data.config import admin_id
-from loader import dp, _, bot
-from states import NewItem, Mailing
+from loader import dp, bot
+from states.admin_states import NewItem, Mailing
 from utils.db_api.models import Item, User
 
 
@@ -18,6 +18,6 @@ async def cancel(message: types.Message, state: FSMContext):
 
 @dp.message_handler(user_id=admin_id, commands=["add_item"])
 async def add_item(message: types.Message):
-    await message.answer(_("Введите название товара или нажмите /cancel"))
+    await message.answer("Введите название товара или нажмите /cancel")
     await NewItem.Name.set()
 
