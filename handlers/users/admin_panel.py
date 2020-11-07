@@ -26,8 +26,8 @@ async def enter_name(message: types.Message, state: FSMContext):
     name = message.text
     item = Item()
     item.name = name
-    await message.answer("Название {name}"
-                            "\nПришлите мне фотографию товара (не документ) или нажмите /cancel").format(name=name)
+    await message.answer(f"Название {name}Пришлите мне фотографию товара (не документ) или нажмите /cancel")
+                            
     await NewItem.Photo.set()
     await state.update_data(item=item)
 
