@@ -11,7 +11,7 @@ from utils.db_api.db_commands import get_item
 
 
 # Хендлер на команду /menu
-@dp.message_handler(Command("menu"))
+@dp.message_handler(commands=['menu'])
 async def show_menu(message: types.Message):
     # Выполним функцию, которая отправит пользователю кнопки с доступными категориями
     await list_categories(message)
