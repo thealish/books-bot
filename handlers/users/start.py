@@ -9,6 +9,6 @@ from loader import bot
 
 @dp.message_handler(CommandStart())
 async def register_user(message: Message):
-    await message.answer(f"Hi{message.chat.first_name}")
+    await message.answer(f"Hi {message.chat.first_name}")
 
 
