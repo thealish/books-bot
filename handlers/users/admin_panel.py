@@ -43,8 +43,17 @@ async def add_photo(message: types.Message, state=FSMContext):
         caption=(f"Название: {item.name}"
                 "\nПришлите мне цену товара или нажмите /cancel")
     )
-    await NewItem.Price.set()
+    await NewItem.Category.set()
     await state.update_data(item=item)
+
+@dp.message_handler(user_id=admin_id, state=NewItem.Category)
+async def enter_price(message: types.Message, state=FSMContext):
+    category = message.text
+    item = Item()
+    item.category = category
+    await message.answer(f"Категория товара:{category}")
+    await state.update_data(item=item)
+    await NewItem.Price.set()
 
 @dp.message_handler(user_id=admin_id, state=NewItem.Price)
 async def enter_price(message: types.Message, state=FSMContext):
@@ -74,16 +83,9 @@ async def enter_price(message: types.Message, state=FSMContext):
     await message.answer(text=f"Цена: {price}Потверждаете? Нажмите /cancel чтобы отменить", reply_markup=markup)
                         
     await state.update_data(item=item)
-    await NewItem.Category.set()
-
-@dp.message_handler(user_id=admin_id, state=NewItem.Category)
-async def enter_price(message: types.Message, state=FSMContext):
-    category = message.text
-    item = Item()
-    item.category = category
-    await message.answer(f"Категория товара:{category}")
-    await state.update_data(item=item)
     await NewItem.Confirm.set()
+
+
 
 @dp.callback_query_handler(user_id=admin_id, text_contains='change', state=NewItem.Confirm)
 async def change_price(call: types.CallbackQuery):
