@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -16,3 +17,7 @@ host = str(os.getenv("IP"))
 db_user = str(os.getenv("DB_USER"))
 
 POSTGRES_URI = f"postgresql://{db_user}:{db_pass}@{host}/{db_name}"
+
+I18N_DOMAIN = 'testbot'
+BASE_DIR = Path(__file__).parent
+LOCALES_DIR = BASE_DIR / 'locales'
