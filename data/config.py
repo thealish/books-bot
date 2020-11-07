@@ -10,12 +10,9 @@ admins = [
     os.getenv("ADMIN_ID"),
 ]
 
-
-
 db_pass = str(os.getenv("DB_PASS"))
 db_name = str(os.getenv("DB_NAME"))
-host = str(os.getenv("ip"))
-db_user= str(os.getenv("DB_USER"))
-
+host = str(os.getenv("IP"))
+db_user = str(os.getenv("DB_USER"))
 
 POSTGRES_URI = f"postgresql://{db_user}:{db_pass}@{host}/{db_name}"

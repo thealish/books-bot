@@ -28,7 +28,7 @@ async def count_items(category_code, subcategory_code = None):
     return total
 
 async def get_items(category_code, subcategory_cdoe) -> List[Item]:
-    items = await Item/.query.where(
+    items = await Item.query.where(
         and_(Item.category_code == category_code,
             Item.subcategory_code == subcategory_cdoe)
     ).gino_all()

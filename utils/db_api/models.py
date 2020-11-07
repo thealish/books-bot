@@ -1,5 +1,6 @@
 from utils.db_api.database import db
 from sqlalchemy import (Column, Integer, BigInteger, String, Sequence, TIMESTAMP, BOOLEAN, JSON)
+from sqlalchemy import sql
 
 
 class User(db.Model):
