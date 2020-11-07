@@ -7,7 +7,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from data.config import admins
 from loader import dp, bot
 from states.admin_states import NewItem, Mailing
-from database import Item, User
+from utils.db_api.models import Item, User
 
 @dp.message_handler(user_id=admin_id, commands=['cancel'], state=NewItem)
 async def cancel(message: types.Message, state=FSMContext):
@@ -29,6 +29,7 @@ async def enter_name(message: types.Message, state:FSMContext):
 	item.name = name
 	await message.answer("Название {name}"
 							"\nПришлите мне фотографию товара (не документ) или намите /cancel").format(name=name)
+
 	await NewItem.Photo.set()
 	await state.update_data(item=item)
 
