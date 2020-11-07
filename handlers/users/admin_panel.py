@@ -38,7 +38,7 @@ async def add_photo(message: types.Message, state=FSMContext):
     data = await state.get_data()
     item: Item = data.get("item")
     item.photo = photo
-    await message.asnwer_photo(
+    await message.answer_photo(
         photo=photo,
         caption=(f"Название: {item.name}"
                 "\nПришлите мне цену товара или нажмите /cancel")
