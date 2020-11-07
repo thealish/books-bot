@@ -26,7 +26,7 @@ async def enter_name(message: types.Message, state: FSMContext):
     name = message.text
     item = Item()
     item.name = name
-    await message.answer(f"Название {name}Пришлите мне фотографию товара (не документ) или нажмите /cancel")
+    await message.answer(f"Название {name}\nПришлите мне фотографию товара (не документ) или нажмите /cancel")
                             
     await NewItem.Photo.set()
     await state.update_data(item=item)
@@ -41,7 +41,7 @@ async def add_photo(message: types.Message, state=FSMContext):
     await message.answer_photo(
         photo=photo,
         caption=(f"Название: {item.name}"
-                "\nПришлите мне цену товара или нажмите /cancel")
+                "\nПришлите мне категорию товара или нажмите /cancel")
     )
     await NewItem.Category.set()
     await state.update_data(item=item)
@@ -51,7 +51,8 @@ async def enter_price(message: types.Message, state=FSMContext):
     category = message.text
     item = Item()
     item.category = category
-    await message.answer(f"Категория товара:{category}")
+    await message.answer(f"Категория товара:{category}\n"                       
+                "\nПришлите мне цену товара или нажмите /cancel")
     await state.update_data(item=item)
     await NewItem.Price.set()
 
