@@ -71,8 +71,8 @@ async def enter_price(message: types.Message, state=FSMContext):
 			]],
 
 		)
-    await message.answer("Цена: {price}\n"
-                        "Потверждаете? Нажмите /cancel чтобы отменить"), reply_markup=markup
+    await message.answer(text=f"Цена: {price}Потверждаете? Нажмите /cancel чтобы отменить", reply_markup=markup)
+                        
     await state.update_data(item=item)
     await NewItem.Confirm.set()
 
