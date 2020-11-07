@@ -1,5 +1,5 @@
 from asyncio import sleep
-
+from utils.db_api.db_commands import add_item
 from aiogram import types
 
 from aiogram.dispatcher import FSMContext
@@ -100,5 +100,9 @@ async def confirm(call: types.CallbackQuery, state:FSMContext):
 	data = await state.get_data()
 	item: Item = data.get("item")
 	await item.create()
+    name = item.name
+    category_name = item.category
+    price = item.price
+    await add_item(name=name,category_name=category_name, price=price)
 	await call.message.answer("Товар удачно создан")
 	await state.reset_state()
