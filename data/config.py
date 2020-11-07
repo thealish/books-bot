@@ -18,4 +18,4 @@ host = str(os.getenv("ip"))
 db_user= str(os.getenv("DB_USER"))
 
 
-POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{ip}/{DATABASE}"
+POSTGRES_URI = f"postgresql://{db_user}:{db_pass}@{host}/{db_name}"
