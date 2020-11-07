@@ -9,9 +9,9 @@ class Purchase(StatesGroup):
 
 class NewItem(StatesGroup):
     Name = State()
-    CategoryName = State()
-    CategoryCode = State()
-    SubcategoryCode = State()
+    Category = State()
+   
+    
     Price = State()
     Photo = State()
     Confirm = State()
