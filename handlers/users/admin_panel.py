@@ -32,7 +32,7 @@ async def enter_name(message: types.Message, state: FSMContext):
     await state.update_data(item=item)
 
 
-@dp.message_handler(user_id=admin_id, state=NewItem.Photo, content_types=ContentType.PHOTO)
+@dp.message_handler(user_id=admin_id, state=NewItem.Photo, content_types=types.ContentType.PHOTO)
 async def add_photo(message: types.Message, state=FSMContext):
     photo = message.photo[-1].file_id
     data = await state.get_data()
