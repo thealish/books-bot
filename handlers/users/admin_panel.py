@@ -6,7 +6,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from data.config import admins
 from loader import dp, bot
-from states import NewItem, Mailing
+from states.admin_states import NewItem, Mailing
 from database import Item, User
 
 @dp.message_handler(user_id=admin_id, commands=['cancel'], state=NewItem)
