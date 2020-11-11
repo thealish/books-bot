@@ -1,31 +1,26 @@
 from utils.db_api.database import db
-from sqlalchemy import (Column, Integer, BigInteger, String, Sequence, TIMESTAMP, BOOLEAN, JSON)
+from sqlalchemy import (Column, Integer, BigInteger, String, Sequence, TIMESTAMP, BOOLEAN, JSON, UniqueConstraint)
 from sqlalchemy import sql
 
 
 class User(db.Model):
     __tablename__ = 'users'
     id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
-    user_id = Column(BigInteger)
-    language = Column(String(2))
+    user_id = Column(BigInteger,unique=True)
     full_name = Column(String(100))
     username = Column(String(50))
-    referral = Column(Integer)
-
     query: sql.select
+
+
 class Item(db.Model):
     __tablename__ = 'items'
     id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
     category_name = Column(db.String(20))
     category_code = Column(db.String(50))
-    name = Column(String(50))
+    name = Column(String(50),unique=True)
     photo = Column(String(250))
     price = Column(Integer)
-     # Код подкатегории (для отображения в колбек дате)
-    subcategory_code = Column(String(50))
-
-    # Название подкатегории (для отображения в кнопке)
-    subcategory_name = Column(String(20))
+    description = Column(String(255))
 
     def __repr__(self):
         return f"""

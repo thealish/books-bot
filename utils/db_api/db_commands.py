@@ -2,7 +2,7 @@ from typing import List
 
 from sqlalchemy import and_
 
-from utils.db_api.models import Item
+from utils.db_api.models import Item, User
 from utils.db_api.database import db
 
 
@@ -12,24 +12,25 @@ async def add_item(**kwargs):
     return new_item
 
 
+async def add_new_user(**kwargs):
+    new_user = await User(**kwargs).create()
+    return new_user
+
+
 # Функция для вывода товаров с РАЗНЫМИ категориями
 async def get_categories() -> List[Item]:
     return await Item.query.distinct(Item.category_name).gino.all()
 
 
-# Функция для вывода товаров с РАЗНЫМИ подкатегориями в выбранной категории
-async def get_subcategories(category) -> List[Item]:
-    return await Item.query.distinct(Item.subcategory_name).where(Item.category_code == category).gino.all()
+
 
 
 # Функция для подсчета товаров с выбранными категориями и подкатегориями
-async def count_items(category_code, subcategory_code=None):
+async def count_items(category_code):
     # Прописываем условия для вывода (категория товара равняется выбранной категории)
     conditions = [Item.category_code == category_code]
 
-    # Если передали подкатегорию, то добавляем ее в условие
-    if subcategory_code:
-        conditions.append(Item.subcategory_code == subcategory_code)
+
 
     # Функция подсчета товаров с указанными условиями
     total = await db.select([db.func.count()]).where(
@@ -39,15 +40,24 @@ async def count_items(category_code, subcategory_code=None):
 
 
 # Функция вывода всех товаров, которые есть в переданных категории и подкатегории
-async def get_items(category_code, subcategory_code) -> List[Item]:
+async def get_items(category_code) -> List[Item]:
     item = await Item.query.where(
-        and_(Item.category_code == category_code,
-             Item.subcategory_code == subcategory_code)
+        and_(Item.category_code == category_code)
     ).gino.all()
     return item
 
 
 # Функция для получения объекта товара по его айди
 async def get_item(item_id) -> Item:
+    item = await Item.query.where(Item.id == item_id).gino.first()
+    return item
+
+
+async def get_item_by_name(item_name) -> Item:
+    item = await Item.query.where(Item.name == item_name).gino.first()
+    return item
+
+
+async def get_description(item_id) -> Item:
     item = await Item.query.where(Item.id == item_id).gino.first()
     return item
