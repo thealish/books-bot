@@ -1,12 +1,12 @@
 from utils.db_api.database import db
-from sqlalchemy import (Column, Integer, BigInteger, String, Sequence, TIMESTAMP, BOOLEAN, JSON, UniqueConstraint)
+from sqlalchemy import (Column, Integer, BigInteger, String, Sequence, TIMESTAMP, BOOLEAN, JSON, ForeignKey)
 from sqlalchemy import sql
 
 
 class User(db.Model):
     __tablename__ = 'users'
     id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
-    user_id = Column(BigInteger,unique=True)
+    user_id = Column(BigInteger, unique=True)
     full_name = Column(String(100))
     username = Column(String(50))
     query: sql.select
@@ -14,14 +14,13 @@ class User(db.Model):
 
 class Item(db.Model):
     __tablename__ = 'items'
-    id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
-    category_name = Column(db.String(20))
-    category_code = Column(db.String(50))
-    name = Column(String(50),unique=True)
+    item_id = Column(Integer, Sequence("user_id_seq"), primary_key=True, autoincrement=True)
+    name = Column(String(50), unique=True)
     photo = Column(String(250))
     price = Column(Integer)
     description = Column(String(255))
-
+    category_name = Column(String(55))
+    category_code = Column(Integer)
     def __repr__(self):
         return f"""
     Товар №{self.id} - {self.name}
@@ -41,3 +40,5 @@ class Purchase(db.Model):
     phone_number = Column(String(50))
     receiver = Column(String(100))
     successful = Column(BOOLEAN, default=False)
+
+

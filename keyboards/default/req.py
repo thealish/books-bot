@@ -9,3 +9,11 @@ req_phone = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True,one_time_keyboard=True
 )
+
+req_location = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Адрес доставки', request_location=True)
+        ]
+    ]
+)

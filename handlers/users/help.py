@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandHelp
 from data.config import admin_id
-
+from aiogram.dispatcher.filters import Command
 from loader import dp
 from utils.misc import rate_limit
 

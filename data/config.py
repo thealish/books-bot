@@ -10,10 +10,9 @@ BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 admins = [
     os.getenv("ADMIN_ID"),
 ]
-admin_id = [
-    885582686,
-    386134461
-]
+admin_id = (
+    885582686
+)
 
 db_pass = str(os.getenv("DB_PASS"))
 db_name = str(os.getenv("DB_NAME"))
