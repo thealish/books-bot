@@ -8,9 +8,7 @@ services:
       PG_PASSWORD: $PGPASSWORD
     restart: always
     ports:
-      - 5432: 5432
-    networks:
-      - botnet
+      - 127.0.0.1:5432:5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data
   tgbot:
@@ -19,14 +17,7 @@ services:
       context: .
     command: python app.py
     restart: always
-    networks:
-      - botnet
     env_file:
       - ".env"
     depends_on:
       - db
-
-
-networks:
-  botnet:
-    driver: bridge
